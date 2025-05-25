@@ -1,0 +1,134 @@
+.Navbar-page-wrapper{
+  background: url();
+  background-size: cover; 
+  width: 100%;
+  height: 100vh; 
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none; 
+  color: inherit; 
+}
+
+.main-navbar {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center; 
+  padding: 15px 30px; 
+  background-color: rgba(0, 0, 0, 0.5); 
+  color: #fff; 
+  position: absolute; 
+  top: 0;
+  left: 0;
+  width: 100%;
+  box-sizing: border-box; 
+  z-index: 1000; 
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.welcome-message {
+  font-size: 1.8em; 
+  margin: 0; 
+  font-weight: normal; 
+  color: #fff; 
+}
+
+.back-button {
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 1.5em;
+  padding: 5px 10px;
+  cursor: pointer;
+  margin-right: 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.back-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-brand {
+  display: none; 
+}
+
+.navbar-links {
+  list-style: none; 
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.navbar-links li {
+  margin-left: 30px;
+}
+
+.navbar-links a {
+  color: #fff;
+  text-decoration: none; 
+  font-size: 1.1em;
+  padding: 5px 0; 
+  transition: color 0.3s ease; 
+}
+
+
+.navbar-links a.active { 
+  color: #a0a0a0; 
+}
+
+@media (max-width: 768px) {
+  .main-navbar {
+    flex-direction: column;
+    padding: 15px 20px;
+    align-items: flex-start;
+  }
+
+  .navbar-left {
+    width: 100%;
+    margin-bottom: 15px;
+    justify-content: center;
+  }
+
+  .welcome-message {
+    text-align: center;
+    width: 100%;
+  }
+
+  .back-button {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .navbar-links {
+    margin-top: 0;
+    flex-direction: column;
+    text-align: center;
+    width: 100%;
+  }
+
+  .navbar-links li {
+    margin: 10px 0;
+  }
+
+  .navbar-links a {
+    display: block;
+  }
+}

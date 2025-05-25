@@ -1,0 +1,132 @@
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+  padding-top: 100px;
+  max-width: auto;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  color: #fff; /* Warna teks jadi putih agar kontras */
+  min-height: calc(100vh - 60px);
+  background-image: url('/pictures/latar.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+}
+
+/* Tambahan overlay transparan untuk teks */
+.description-section {
+  text-align: center;
+  margin-bottom: auto;
+  max-width: 1080px;
+  background-color: rgba(0, 0, 0, 0.6); /* Hitam transparan */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.description-section h1 {
+  font-size: 3.5em;
+  color: #fff; /* Warna teks jadi putih */
+  margin-bottom: 20px;
+  line-height: 1.2;
+}
+
+.description-section p {
+  font-size: 1.1em;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  color: #eee; /* Biru muda/putih pucat supaya nyaman dibaca */
+}
+
+.image-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto auto;
+  gap: 20px;
+  width: 100%;
+  max-width: 1000px;
+  position: relative;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.gallery-item.left {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  justify-self: center;
+}
+
+.gallery-item.center-top {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+  align-self: end;
+  justify-self: center;
+  margin-bottom: -50px;
+  z-index: 1;
+}
+
+.gallery-item.right {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+  align-self: center;
+  justify-self: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .home-container {
+    padding: 20px 15px;
+  }
+
+  .description-section h1 {
+    font-size: 2.5em;
+  }
+
+  .description-section p {
+    font-size: 1em;
+  }
+
+  .image-gallery {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: 30px;
+  }
+
+  .gallery-item.left,
+  .gallery-item.center-top,
+  .gallery-item.right {
+    grid-column: 1 / 2;
+    grid-row: auto;
+    margin-bottom: 0;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+
+  .gallery-item img {
+    height: 200px;
+  }
+}
+
+@media (max-width: 480px) {
+  .description-section h1 {
+    font-size: 2em;
+  }
+}
