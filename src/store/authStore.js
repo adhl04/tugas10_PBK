@@ -36,7 +36,7 @@ export const useAuthStore = defineStore('auth', () => {
   async function login(email, password) {
     try {
       // 1. Ambil data pengguna dari db.json (pastikan URL dan endpoint benar)
-      const response = await fetch('http://localhost:3000/users'); 
+      const response = await fetch('https://muhammad-aidhil.glitch.me/user'); 
       if (!response.ok) {
         throw new Error('Gagal terhubung ke server.');
       }

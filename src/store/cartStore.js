@@ -27,7 +27,7 @@ export const useCartStore = defineStore('cart', () => {
     }
     const userId = authStore.user.id;
     try {
-      const response = await fetch(`http://localhost:3000/cart?userId=${userId}`);
+      const response = await fetch(`https://muhammad-aidhil.glitch.me/cart?userId=${userId}`);
       if (!response.ok) throw new Error("Gagal mengambil data keranjang.");
       cartItems.value = await response.json();
     } catch (error) {
@@ -49,7 +49,7 @@ export const useCartStore = defineStore('cart', () => {
       // Jika produk sudah ada, update kuantitasnya (PATCH)
       const newQuantity = existingItem.quantity + 1;
       try {
-        await fetch(`http://localhost:3000/cart/${existingItem.id}`, {
+        await fetch(`https://muhammad-aidhil.glitch.me/cart/${existingItem.id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ quantity: newQuantity })
@@ -69,7 +69,7 @@ export const useCartStore = defineStore('cart', () => {
         quantity: 1
       };
       try {
-        await fetch('http://localhost:3000/cart', {
+        await fetch('https://muhammad-aidhil.glitch.me/cart', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newItem)
@@ -84,7 +84,7 @@ export const useCartStore = defineStore('cart', () => {
   // Menghapus item dari keranjang di server
   async function removeFromCart(cartItemId) {
     try {
-      await fetch(`http://localhost:3000/cart/${cartItemId}`, {
+      await fetch(`https://muhammad-aidhil.glitch.me/cart/${cartItemId}`, {
         method: 'DELETE'
       });
       await fetchCart(); // Muat ulang keranjang
@@ -99,7 +99,7 @@ export const useCartStore = defineStore('cart', () => {
     if (!item) return;
     const newQuantity = item.quantity + 1;
     try {
-      await fetch(`http://localhost:3000/cart/${item.id}`, {
+      await fetch(`https://muhammad-aidhil.glitch.me/cart/${item.id}`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ quantity: newQuantity })
@@ -118,7 +118,7 @@ export const useCartStore = defineStore('cart', () => {
     if (item.quantity > 1) {
       const newQuantity = item.quantity - 1;
       try {
-        await fetch(`http://localhost:3000/cart/${item.id}`, {
+        await fetch(`https://muhammad-aidhil.glitch.me/cart/${item.id}`, {
           method: 'PATCH',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ quantity: newQuantity })

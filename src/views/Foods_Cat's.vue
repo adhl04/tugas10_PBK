@@ -77,7 +77,7 @@ export default {
     async handleDelete(productId) {
       if (confirm('Apakah Anda yakin ingin menghapus produk ini?')) {
         try {
-          const response = await fetch(`http://localhost:3000/cat_foods/${productId}`, {
+          const response = await fetch(`https://muhammad-aidhil.glitch.me/cat_foods/${productId}`, {
             method: 'DELETE',
           });
           if (!response.ok) {
