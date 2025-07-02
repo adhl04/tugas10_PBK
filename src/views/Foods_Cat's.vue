@@ -61,7 +61,7 @@ export default {
   methods: {
     async fetchCatFoods() {
       try {
-        const response = await fetch('http://localhost:3000/cat_foods');
+        const response = await fetch('https://muhammad-aidhil.glitch.me/cat_foods');
         if (!response.ok) throw new Error('Gagal memuat data produk.');
         this.catFoods = await response.json();
       } catch (error) {
