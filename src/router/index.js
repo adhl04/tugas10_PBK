@@ -37,14 +37,14 @@ const routes = [
     name: "Pet_Shop",
     component: Pet_Shop,
     // 3. Menambahkan meta yang hilang
-    meta: { requiresAuth: true } 
+    
   },
   {
     path: "/foods_cat's",
     name: "Foods_CatS",
     component: Foods_CatS,
     // 4. Menambahkan meta yang hilang
-    meta: { requiresAuth: true }
+  
   },
   {
     path: '/cart',
