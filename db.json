@@ -1,0 +1,34 @@
+{
+  "user": [
+    {
+      "email": "maidhil0@gmail.com",
+      "password": "aidhil123",
+      "role": "admin",
+      "id": "34b2"
+    }
+  ],
+  "cat_foods": [
+    {
+      "id": "3",
+      "name": "Equilibrio Filhotes Indoor Kitten 8 kg",
+      "description": "Makanan hewan ini mengandung tepung gluten jagung, ragi kering, hati ayam, biji rami utuh, natrium klorida, hingga kalium klorida. Selain itu, makanan ini juga mengandung berbagai vitamin dan mineral di dalamnya. Kandungan vitamin dan mineralnya, yaitu asam folat, asam pantotenat, vitamin A, B1, B12, B2, B6, D, K, E, dan C.",
+      "image_url": "/pictures/m3.jpg",
+      "price": 800000
+    },
+    {
+      "id": "4",
+      "name": "Cleo Adult Cat Food Salmon Flavor 1.2 kg",
+      "description": "Cleo Adult Cat Food Salmon Flavor adalah makanan kucing dengan jenis makanan kering. Memberikan Cleo Adult Cat Food dapat membantu kucing dalam memenuhi kebutuhan nutrisi sehari-hari. Rentang harga: Rp.35.400-Rp.71.500 per pack.",
+      "image_url": "/pictures/m4.jpg",
+      "price": 45000
+    },
+    {
+      "id": "5",
+      "name": "Royal Canin Kitten Persian Makanan Anak Kucing Persia Dry 10 kg",
+      "description": "Makanan untuk anak kucing persia yang memiliki formula khusus. Makanan ini mudah dicerna dengan kualitas yang baik. Selain itu, Royal Canin Kitten Persian juga mengandung serat dan prebiotik yang mendukung kesehatan usus dan pencernaan anak kucing. Makanan ini mengandung protein unggas, ragi, minyak ikan, minyak kedelai, sekam, dan ekstrak marigold. Rentang harga: Rp1.296.000-Rp1.798.800 per pack.",
+      "image_url": "/pictures/m5.jpg",
+      "price": 1350000
+    }
+  ],
+  "cart": []
+}

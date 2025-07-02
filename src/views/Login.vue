@@ -3,13 +3,15 @@
     <div class="login-container">
       <h2>Login</h2>
 
-      <form @submit.prevent="onSubmit">
+      <!-- Form sekarang memanggil method handleLogin -->
+      <form @submit.prevent="handleLogin">
         <div class="input-box">
           <i class="bx bxs-user"></i>
+          <!-- Menggunakan v-model="email" (lebih sesuai untuk login) -->
           <input
-            v-model="username"
-            type="text"
-            placeholder="Username"
+            v-model="email"
+            type="email"
+            placeholder="Email"
             required
           />
         </div>
@@ -38,42 +40,47 @@
           <router-link to="/register">Register</router-link>
         </p>
 
-        <p v-if="error" class="error-message">{{ error }}</p>
+        <!-- Menampilkan pesan error dari store atau proses login -->
+        <p v-if="loginError" class="error-message">{{ loginError }}</p>
       </form>
       <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     </div>
-    </div>
-    
+  </div>
 </template>
 
 <script>
 import { ref } from "vue";
-import { useRouter } from "vue-router";
-import auth from "../auth"; 
+// Perubahan: Menggunakan alias '@' untuk path yang lebih konsisten
+import { useAuthStore } from "../store/authStore"; 
 
 export default {
   name: "Login",
   setup() {
-    const router = useRouter();
-    const username = ref("");
-    const password = ref("");
-    const error = ref(""); 
+    // Inisialisasi store Pinia
+    const authStore = useAuthStore();
 
-    const onSubmit = async () => { 
-      error.value = ""; 
+    const email = ref("");
+    const password = ref("");
+    const loginError = ref(""); // Variabel untuk menampung pesan error
+
+    // Fungsi untuk menangani submit form
+    const handleLogin = async () => { 
+      loginError.value = ""; // Reset pesan error setiap kali mencoba login
       try {
-        await auth.login(username.value, password.value);
-        router.push("/");
+        // Panggil action 'login' dari store
+        await authStore.login(email.value, password.value);
+        // Navigasi/redirect (router.push) sekarang ditangani di dalam store
       } catch (err) {
-        error.value = err.message || "Terjadi kesalahan saat login.";
+        // Tangkap error yang dilempar dari store jika login gagal
+        loginError.value = err.message || "Terjadi kesalahan saat login.";
       }
     };
 
     return {
-      username,
+      email,
       password,
-      error,
-      onSubmit,
+      loginError,
+      handleLogin,
     };
   },
 };
@@ -81,4 +88,10 @@ export default {
 
 <style scoped>
 @import '../Style/Login.css';
+
+.error-message {
+  color: red;
+  text-align: center;
+  margin-top: 15px;
+}
 </style>
