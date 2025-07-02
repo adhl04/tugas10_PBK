@@ -1,73 +1,104 @@
-import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import { defineStore } from 'pinia';
+import { ref, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
-// Nama 'useAuthStore' adalah konvensi umum untuk store otentikasi
+// Menggunakan gaya Composition API (setup function) untuk store
 export const useAuthStore = defineStore('auth', () => {
-  const router = useRouter()
+  const router = useRouter();
 
-  // STATE: Inisialisasi state dari localStorage saat store dibuat.
-  const user = ref(JSON.parse(localStorage.getItem('user')))
-  const token = ref(localStorage.getItem('token'))
+  // =======================================================
+  // STATE
+  // Inisialisasi state langsung dari localStorage.
+  // Ini cara modern untuk menjaga sesi login tetap ada saat halaman di-refresh.
+  // =======================================================
+  const user = ref(JSON.parse(localStorage.getItem('user-data')) || null);
+  const token = ref(localStorage.getItem('user-token') || null);
 
-  // GETTER BARU: Untuk mengecek apakah pengguna adalah admin
+  // =======================================================
+  // GETTERS (menggunakan computed)
+  // =======================================================
+
+  // Getter untuk memeriksa apakah pengguna sudah login
+  const isAuthenticated = computed(() => !!token.value && !!user.value);
+
+  // Getter BARU untuk memeriksa apakah pengguna adalah admin
   const isAdmin = computed(() => user.value && user.value.role === 'admin');
 
-  // GETTERS: Mengecek status login berdasarkan data yang ada.
-  const isAuthenticated = computed(() => !!token.value && !!user.value)
+  // =======================================================
+  // ACTIONS
+  // =======================================================
 
-  // ACTIONS: Fungsi untuk mengubah state (login/logout)
+  /**
+   * Aksi untuk menangani proses login pengguna.
+   * @param {string} email - Email yang dimasukkan pengguna.
+   * @param {string} password - Password yang dimasukkan pengguna.
+   */
   async function login(email, password) {
     try {
-      // Ganti URL ini dengan endpoint login dari db.json Anda
-      const response = await fetch('http://localhost:3000/user') 
-      const usersData = await response.json()
+      // 1. Ambil data pengguna dari db.json (pastikan URL dan endpoint benar)
+      const response = await fetch('http://localhost:3000/users'); 
+      if (!response.ok) {
+        throw new Error('Gagal terhubung ke server.');
+      }
+      const usersData = await response.json();
 
-      // Cari pengguna berdasarkan email dan password
+      // 2. Cari pengguna berdasarkan email dan password
       const foundUser = usersData.find(
         (u) => u.email === email && u.password === password
-      )
+      );
 
+      // 3. Jika pengguna ditemukan
       if (foundUser) {
-        // PERUBAHAN: Simpan semua data user yang relevan, termasuk role
-        const userData = { email: foundUser.email, role: foundUser.role };
+        // 4. Siapkan data yang akan disimpan
+        const userData = { 
+          id: foundUser.id, 
+          email: foundUser.email, 
+          name: foundUser.name,
+          role: foundUser.role // Pastikan ada properti 'role' di db.json Anda
+        };
         const userToken = `fake-jwt-token-for-${foundUser.email}`;
 
-        // Jika ditemukan, simpan data ke state Pinia
-        user.value = userData
-        token.value = userToken
+        // 5. Simpan data ke state Pinia
+        user.value = userData;
+        token.value = userToken;
 
-        // Simpan juga ke localStorage agar persisten
-        localStorage.setItem('user', JSON.stringify(userData));
-        localStorage.setItem('token', userToken);
+        // 6. Simpan juga ke localStorage agar sesi login tidak hilang
+        localStorage.setItem('user-data', JSON.stringify(userData));
+        localStorage.setItem('user-token', userToken);
+        
+        console.log('Login berhasil sebagai:', userData.role);
 
-        // Arahkan ke halaman utama setelah login berhasil
-        router.push('/')
-        console.log('Login berhasil!')
+        // 7. Arahkan ke halaman utama setelah login berhasil
+        router.push('/');
       } else {
-        // Jika tidak ditemukan, lempar error
-        throw new Error('Email atau password salah')
+        // 8. Jika tidak ditemukan, lempar error
+        throw new Error('Email atau password salah.');
       }
     } catch (error) {
-      console.error('Gagal melakukan login:', error)
+      console.error('Gagal melakukan login:', error);
       // Lempar lagi error agar bisa ditangkap di komponen Login.vue
-      throw error
+      throw error;
     }
   }
 
+  /**
+   * Aksi untuk logout.
+   */
   function logout() {
-    // Kosongkan semua data saat logout dari state Pinia
-    user.value = null
-    token.value = null
+    // Kosongkan semua data dari state Pinia
+    user.value = null;
+    token.value = null;
 
     // Hapus juga dari localStorage
-    localStorage.removeItem('user');
-    localStorage.removeItem('token');
+    localStorage.removeItem('user-data');
+    localStorage.removeItem('user-token');
 
-    // Arahkan kembali ke halaman login
-    router.push('/login')
+    // Arahkan kembali ke halaman login untuk pengalaman pengguna yang jelas
+    router.push('/login');
   }
 
-  // PERUBAHAN: Return semua state, termasuk getter isAdmin
-  return { user, token, isAuthenticated, isAdmin, login, logout }
-})
+  // =======================================================
+  // Expose state, getters, dan actions agar bisa digunakan di komponen
+  // =======================================================
+  return { user, token, isAuthenticated, isAdmin, login, logout };
+});
