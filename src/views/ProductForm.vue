@@ -52,7 +52,7 @@ const product = ref({
 onMounted(async () => {
   if (isEditing.value) {
     try {
-      const response = await fetch(`http://localhost:3000/cat_foods/${productId.value}`);
+      const response = await fetch(`https://muhammad-aidhil.glitch.me/cat_foods/${productId.value}`);
       if (!response.ok) {
         throw new Error(`Produk dengan ID ${productId.value} tidak ditemukan.`);
       }
@@ -75,8 +75,8 @@ const handleSubmit = async () => {
 
   try {
     const url = isEditing.value 
-      ? `http://localhost:3000/cat_foods/${productId.value}` 
-      : 'http://localhost:3000/cat_foods';
+      ? `https://muhammad-aidhil.glitch.me/cat_foods/${productId.value}` 
+      : 'https://muhammad-aidhil.glitch.me/cat_foods';
     
     const method = isEditing.value ? 'PUT' : 'POST';
 
@@ -115,11 +115,42 @@ const handleSubmit = async () => {
   z-index: 2; /* Mengangkat elemen ini */
 }
 
-.loading-message { text-align: center; padding: 2rem; font-style: italic; }
-.form-group { margin-bottom: 1.5rem; }
-label { display: block; margin-bottom: 0.5rem; font-weight: bold; }
-input, textarea { width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-button { width: 100%; padding: 1rem; background-color: #3498db; color: white; border: none; border-radius: 4px; font-size: 1rem; cursor: pointer; transition: background-color 0.3s; }
-button:hover { background-color: #2980b9; }
-button:disabled { background-color: #a9a9a9; cursor: not-allowed; }
+.loading-message { 
+  text-align: center; 
+  padding: 2rem; 
+  font-style: italic; 
+}
+.form-group { 
+  margin-bottom: 1.5rem; 
+}
+label { 
+  display: block; 
+  margin-bottom: 0.5rem; 
+  font-weight: bold; 
+}
+input, textarea { 
+  width: 100%; 
+  padding: 0.75rem; 
+  border: 1px solid #ccc; 
+  border-radius: 4px; 
+  box-sizing: border-box; 
+}
+button { 
+  width: 100%; 
+  padding: 1rem; 
+  background-color: #3498db; 
+  color: white; 
+  border: none; 
+  border-radius: 4px; 
+  font-size: 1rem; 
+  cursor: pointer; 
+  transition: background-color 0.3s; 
+}
+button:hover {
+  background-color: #2980b9; 
+}
+button:disabled { 
+  background-color: #a9a9a9; 
+  cursor: not-allowed; 
+  }
 </style>

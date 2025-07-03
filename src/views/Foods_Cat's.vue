@@ -103,11 +103,30 @@ export default {
 
 <style scoped>
 @import '../Style/Food.css';
-.admin-buttons { margin-top: 10px; display: flex; gap: 10px; }
-.edit-button, .delete-button { padding: 5px 10px; border: none; cursor: pointer; border-radius: 4px; }
-.edit-button { background-color: #f0ad4e; color: white; }
-.delete-button { background-color: #d9534f; color: white; }
-.product-price { font-weight: bold; margin: 10px 0; font-size: 1.1rem; }
+.admin-buttons { 
+  margin-top: 10px; 
+  display: flex; 
+  gap: 10px; 
+}
+.edit-button, .delete-button { 
+  padding: 5px 10px; 
+  border: none; 
+  cursor: pointer; 
+  border-radius: 4px; 
+}
+.edit-button { 
+  background-color: #f0ad4e; 
+  color: white; 
+}
+.delete-button { 
+  background-color: #d9534f; 
+  color: white; 
+}
+.product-price { 
+  font-weight: bold; 
+  margin: 10px 0; 
+  font-size: 1.1rem; 
+}
 
 .admin-actions { 
   text-align: center; 
